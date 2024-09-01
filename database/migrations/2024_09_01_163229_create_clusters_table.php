@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("token");
             $table->string("description");
+            $table->boolean("selected")->default(false);
             $table->string("endpoint")->default("https://localhost:1234");
             $table->timestamps();
         });
