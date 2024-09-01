@@ -138,7 +138,7 @@ interface NavItemSingleProps {
   Icon: LucideIcon, 
   isMobileNav: boolean 
   isMinimized: boolean
-  hideIcon: boolean
+  hideIcon?: boolean
 }
 
 
