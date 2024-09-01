@@ -124,6 +124,56 @@ export const navItems: NavItem[] = [
     label: 'user'
   },
   {
+    title: 'Clusters',
+    href: '/dashboard/clusters',
+    icon: 'clusters',
+    label: 'clusters'
+  },
+  {
+    title: 'Services',
+    href: '/dashboard/services',
+    icon: 'services',
+    label: 'services'
+  },
+  {
+    title: 'Resources',
+    href: '/dashboard/user',
+    icon: 'resources',
+    label: 'resources',
+    children: [
+      {
+        title: 'Nodes',
+        href: '/dashboard/resources/nodes',
+        icon: 'user',
+        label: 'nodes'
+      },
+      {
+        title: 'Pods',
+        href: '/dashboard/resources/pods',
+        icon: 'user',
+        label: 'pods'
+      },
+      {
+        title: 'Deployments',
+        href: '/dashboard/resources/deployments',
+        icon: 'user',
+        label: 'deployments'
+      },
+      {
+        title: 'Namespaces',
+        href: '/dashboard/resources/namespaces',
+        icon: 'user',
+        label: 'namespaces'
+      },
+      {
+        title: 'Volumes',
+        href: '/dashboard/resources/volumes',
+        icon: 'user',
+        label: 'volumes'
+      },
+    ]
+  },
+  {
     title: 'Employee',
     href: '/dashboard/employee',
     icon: 'employee',
@@ -135,12 +185,12 @@ export const navItems: NavItem[] = [
     icon: 'profile',
     label: 'profile'
   },
-  {
-    title: 'Kanban',
-    href: '/dashboard/kanban',
-    icon: 'kanban',
-    label: 'kanban'
-  },
+  // {
+  //   title: 'Kanban',
+  //   href: '/dashboard/kanban',
+  //   icon: 'kanban',
+  //   label: 'kanban'
+  // },
   {
     title: 'Login',
     href: '/',
