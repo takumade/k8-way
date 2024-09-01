@@ -1,7 +1,4 @@
 # K8-way 
-
-![Dog image](./dog.png)
-
 ## About K8-way
 
 
