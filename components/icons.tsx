@@ -28,7 +28,10 @@ import {
   User,
   User2Icon,
   UserX2Icon,
-  X
+  X,
+  Server,
+  Cpu,
+  Network
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -36,6 +39,9 @@ export type Icon = LucideIcon;
 export const Icons = {
   dashboard: LayoutDashboardIcon,
   logo: Command,
+  services: Network,
+  clusters: Server,
+  resources: Cpu,
   login: LogIn,
   close: X,
   profile: User2Icon,
