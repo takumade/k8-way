@@ -1,4 +1,9 @@
+# K8-way 
+
+![Dog image](./dog.png)
+
 ## About K8-way
+
 
 Manage your Kubernetes cluster easily
 
