@@ -5,13 +5,39 @@
 Manage your Kubernetes cluster easily
 
 ## Stack 
-Laravel (Backend)
-Filament PHP (Dashboard)
-SQLite (Database)
+- Next JS (Backend)
+- TailwindCSS (Dashboard)
+- SQLite (Database)
 
 ## Installation
 
-Coming Soon
+Follow these steps to clone the repository and start the development server:
+
+```sh
+git clone https://github.com/takumade/k8-way.git
+```
+
+Then install dependencies:
+
+```sh
+npm install
+```
+
+
+Create a .env.local file by copying the example environment file: 
+
+```sh
+cp env.example.txt .env.local
+```
+
+Add the required environment variables to the .env.local file.
+
+Then run the project:
+```sh
+npm run dev
+```
+
+You should now be able to access the application at http://localhost:3000.
 
 
 ## Todo
@@ -54,15 +80,12 @@ Deployment
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Thank you for considering contributing to k8s project
 
 ## Code of Conduct
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
