@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend-app
-          image: full-frontend:latest
+          image: localhost:32000/frontend:latest
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: full-backend:latest
+          image: localhost:32000/backend:latest
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
