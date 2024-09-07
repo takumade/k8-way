@@ -10,3 +10,6 @@ sudo docker build -t localhost:32000/backend:latest backend
 
 sudo docker push localhost:32000/frontend:latest
 sudo docker push localhost:32000/backend:latest
+
+# Deploy on kubernetes 
+sudo microk8s kubectl apply -f .
