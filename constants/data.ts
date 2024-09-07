@@ -8,6 +8,45 @@ export type User = {
   verified: boolean;
   status: string;
 };
+
+
+export type Cluster = {
+ id: number;
+ name: string;
+ api: string; 
+ token: string;
+}
+
+
+export const clusters: Cluster[] = [
+
+  {
+    id: 1, 
+    name: "Eagle Cluster",
+    api: 'eagle.cluster-xyz.com',
+    token: "ejy...."
+  },
+  {
+    id: 2, 
+    name: "Snake Cluster",
+    api: 'snake.cluster-xyz.com',
+    token: "ejy...."
+  },
+  {
+    id: 3, 
+    name: "Leopard Cluster",
+    api: 'leopard.cluster-xyz.com',
+    token: "ejy...."
+  },
+  {
+    id: 4, 
+    name: "Ant Cluster",
+    api: 'ant.cluster-xyz.com',
+    token: "ejy...."
+  }
+]
+
+
 export const users: User[] = [
   {
     id: 1,
