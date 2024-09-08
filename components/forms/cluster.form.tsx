@@ -63,7 +63,6 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
   initialData
 }: ClusterFormProps) => {
 
-    console.log("Initial Data: ", initialData)
   const params = useParams();
   const router = useRouter();
   const { toast } = useToast();
@@ -90,23 +89,25 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
   const onSubmit = async (data: ClusterFormValues) => {
 
     try {
+
+    
+
       setLoading(true);
-      if (initialData) {
-        // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
-         await updateCluster(initialData.clusterId as number, data)
+      if (initialData?.clusterId === "new") {
+        let res = await createCluster(data)      
       } else {
-        // const res = await axios.post(`/api/products/create-product`, data);
-        // console.log("product", res);
-
-        await createCluster(data)
-
+        let res = await updateCluster(initialData?.clusterId as number, data)
       }
+
+
       router.refresh();
       router.push(`/dashboard/clusters`);
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem with your request.'
+        variant: 'success',
+        title: 'Success',
+        description: initialData?.clusterId == "new" ? 
+                  'Item was created successfully':
+                  'Item was updated successfully'
       });
     } catch (error: any) {
       toast({
