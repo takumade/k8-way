@@ -6,10 +6,11 @@ import { Separator } from '@/components/ui/separator';;
 import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { columns } from './columns';
-import { Cluster } from '@/constants/data';
+import { Cluster } from '@/database/entities';
+
 
 interface ProductsClientProps {
-  data: Cluster[];
+  data: Cluster[] | undefined
 }
 
 export const ClusterClient: React.FC<ProductsClientProps> = ({ data }) => {
@@ -19,7 +20,7 @@ export const ClusterClient: React.FC<ProductsClientProps> = ({ data }) => {
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`Clusters (${data.length})`}
+          title={`Clusters (${data?.length})`}
           description="Manage clusters (Client side table functionalities.)"
         />
         <Button
@@ -30,7 +31,7 @@ export const ClusterClient: React.FC<ProductsClientProps> = ({ data }) => {
         </Button>
       </div>
       <Separator />
-      <DataTable searchKey="name" columns={columns} data={data} />
+      <DataTable searchKey="name" columns={columns} data={data as Cluster[]} />
     </>
   );
 };
