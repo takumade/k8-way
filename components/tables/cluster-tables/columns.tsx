@@ -1,10 +1,10 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
 import { CellAction } from './cell-action'
-import { User } from '@/constants/data';
+import { Cluster } from '@/constants/data';
 import { Checkbox } from '@/components/ui/checkbox';
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Cluster>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -34,7 +34,16 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'token',
-    header: 'TOKEN'
+    header: 'TOKEN',
+    cell: (props) => (
+      //@ts-ignore
+      <span>{props.getValue().substr(0, 20)}...</span>
+    )
+
+  },
+  {
+    accessorKey: 'description',
+    header: 'DESCRIPTION'
   },
   {
     id: 'actions',
