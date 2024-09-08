@@ -8,13 +8,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { User } from '@/constants/data';
+import { useToast } from '@/components/ui/use-toast';
+import { Cluster,  } from '@/constants/data';
+import { deleteCluster } from '@/repositories/clusterRepository';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface CellActionProps {
-  data: User;
+  data: Cluster;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -22,7 +24,28 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const onConfirm = async () => {};
+  const {toast} = useToast()
+
+  const onConfirm = async () => {
+    
+    try{
+      await deleteCluster(data.id)
+      toast({
+        variant: 'success',
+        title: 'Success',
+        description: "Item was deleted successfully"
+      });
+    }catch(error){
+      console.log(error)
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Cannot delete cluster!'
+      });
+    }
+
+    setOpen(false)
+  };
 
   return (
     <>
