@@ -15,3 +15,10 @@ export async function createCluster(data: NewCluster){
                     .returningAll()
                     .executeTakeFirstOrThrow()
 }
+
+
+export async function updateCluster(id: number, updateWith: ClusterUpdate) {
+    await db.updateTable('cluster')
+            .set(updateWith)
+            .where('id', '=', id).execute()
+  }
