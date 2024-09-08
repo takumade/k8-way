@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/database";
-import { Cluster, ClusterUpdate, NewCluster } from "@/entities";
+import { Cluster, ClusterUpdate, NewCluster } from "@/database/entities";
 
 
 export async function findClusterById(id: number) {
