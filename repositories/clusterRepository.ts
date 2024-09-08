@@ -1,3 +1,5 @@
+"use server"
+
 import { db } from "@/database";
 import { Cluster, ClusterUpdate, NewCluster } from "@/entities";
 
