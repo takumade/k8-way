@@ -23,16 +23,20 @@ import {
 
 import { buttonVariants } from "@/components/ui/button"
 import { LucideIcon } from 'lucide-react';
+import { ClusterSelector } from './cluster-selector';
+import { Cluster } from '@/database/entities';
 
 interface DashboardNavProps {
   items: NavItem[];
   setOpen?: Dispatch<SetStateAction<boolean>>;
   isMobileNav?: boolean;
+  clusters: Cluster[]
 }
 
 export function DashboardNav({
   items,
   setOpen,
+  clusters,
   isMobileNav = false
 }: DashboardNavProps) {
   const path = usePathname();
@@ -46,6 +50,7 @@ export function DashboardNav({
 
   return (
     <nav className="grid items-start gap-2">
+      <ClusterSelector clusters={clusters}  />
       <TooltipProvider>
         {items.map((item, index) => {
           const Icon = Icons[item.icon || 'arrowRight'];
