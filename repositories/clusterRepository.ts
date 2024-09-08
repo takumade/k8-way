@@ -4,6 +4,13 @@ import { db } from "@/database";
 import { Cluster, ClusterUpdate, NewCluster } from "@/database/entities";
 
 
+
+export async function getClusters() {
+    return await db.selectFrom('cluster')
+        .selectAll()
+        .execute()
+}
+
 export async function findClusterById(id: number) {
     return await db.selectFrom('cluster')
         .where('id', '=', id)
