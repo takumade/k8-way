@@ -12,10 +12,10 @@ import {
   }
 
   export interface ClusterTable {
-
     id: Generated<number>  
     name: string
     api: string
+    token: string
     description: string
     created_at: ColumnType<Date, string | undefined, never>
     updated_at: ColumnType<Date, string | undefined, never>
