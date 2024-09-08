@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "database/runMigrations.ts"  ],
   "exclude": [
     "node_modules"
   ]

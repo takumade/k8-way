@@ -28,7 +28,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox';
 // import FileUpload from "@/components/FileUpload";
 import { useToast } from '../ui/use-toast';
-import { createCluster } from '@/repositories/clusterRepository';
+import { createCluster, updateCluster } from '@/repositories/clusterRepository';
 
 
 
@@ -54,12 +54,14 @@ const formSchema = z.object({
 type ClusterFormValues = z.infer<typeof formSchema>;
 
 interface ClusterFormProps {
-  initialData: any | null;
+  initialData: {
+    clusterId: number | string
+  } | null;
 }
 
 export const ClusterForm: React.FC<ClusterFormProps> = ({
   initialData
-}) => {
+}: ClusterFormProps) => {
 
     console.log("Initial Data: ", initialData)
   const params = useParams();
@@ -73,9 +75,7 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
   const toastMessage = initialData ? 'Cluster updated.' : 'Cluster created.';
   const action = initialData ? 'Save changes' : 'Create';
 
-  const defaultValues = initialData
-    ? initialData
-    : {
+  const defaultValues =  {
         name: '',
         api: '',
         token: '',
@@ -93,7 +93,7 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
       setLoading(true);
       if (initialData) {
         // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
-
+         await updateCluster(initialData.clusterId as number, data)
       } else {
         // const res = await axios.post(`/api/products/create-product`, data);
         // console.log("product", res);
