@@ -2,6 +2,7 @@
   "name": "nextshcdndashboardstarter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "author": {
     "name": "Kiran",
     "url": "https://github.com/Kiranism"
@@ -9,6 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "migrate": "npx tsx database/runMigrations.ts",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier . --write",
@@ -84,6 +86,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "tsx": "^4.19.0"
   }
 }
