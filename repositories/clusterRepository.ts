@@ -22,3 +22,10 @@ export async function updateCluster(id: number, updateWith: ClusterUpdate) {
             .set(updateWith)
             .where('id', '=', id).execute()
   }
+
+
+  export async function deleteCluster(id: number) {
+    return await db.deleteFrom('cluster').where('id', '=', id)
+      .returningAll()
+      .executeTakeFirst()
+  }
