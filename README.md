@@ -40,6 +40,21 @@ npm run dev
 You should now be able to access the application at http://localhost:3000.
 
 
+## Migration
+
+To migrate execute the following commands
+
+```sh
+npm i -D tsx
+```
+
+The run the following
+
+```sh
+npm run migrate
+```
+
+
 ## Todo
 
 Query resource types
