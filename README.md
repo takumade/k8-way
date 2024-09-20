@@ -1,5 +1,5 @@
-# K8-way 
-## About K8-way
+# Kubiru
+## About Kubiru
 
 
 Manage your Kubernetes cluster easily
