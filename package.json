@@ -1,10 +1,10 @@
 {
-  "name": "nextshcdndashboardstarter",
+  "name": "kubiru",
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name": "Kiran",
-    "url": "https://github.com/Kiranism"
+    "name": "Takucoder",
+    "url": "https://github.com/takumade"
   },
   "scripts": {
     "dev": "next dev",
