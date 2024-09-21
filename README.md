@@ -9,8 +9,11 @@ Manage your Kubernetes cluster easily
 
 ## Stack 
 ✅ Next JS (Backend)
+
 ✅ TailwindCSS (Dashboard)
+
 ✅ Kysely (ORM)
+
 ✅ SQLite (Database)
 
 ## Installation
