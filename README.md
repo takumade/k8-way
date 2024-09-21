@@ -8,13 +8,10 @@ Manage your Kubernetes cluster easily
 ![Cluster Page](./images/cluster-page.png)
 
 ## Stack 
-✅ Next JS (Backend)
-
-✅ TailwindCSS (Dashboard)
-
-✅ Kysely (ORM)
-
-✅ SQLite (Database)
+✅ Next JS (Backend) <br />
+✅ TailwindCSS (Dashboard) <br />
+✅ Kysely (ORM) <br />
+✅ SQLite (Database) 
 
 ## Installation
 
