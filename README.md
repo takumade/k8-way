@@ -1,7 +1,9 @@
 # Kubiru
+
+![Cluster Page](./images/Kubiru.png)
+
+
 ## About Kubiru
-
-
 Manage your Kubernetes cluster easily
 
 
