@@ -53,4 +53,8 @@ export async function getPods() {
     return await getResource(myCluster, 'pods')
 }
 
+export async function getDeployments() {
+    return await getResource(myCluster, 'deployments')
+}
+
 
