@@ -1,8 +1,16 @@
+'use server'
+
+
+
+import fetch from 'node-fetch'
+
+import https from 'https'
+
 
 function generateHeaders(k8s_token:string) {
     return {
         'Content-Type': 'application/json',
-        'Authorization ': `Bearer ${k8s_token}`
+        'Authorization': `Bearer ${k8s_token}`
     }
 }
 
@@ -13,11 +21,14 @@ interface Cluster {
 
 const myCluster:Cluster = {
     endpoint: "127.0.0.1:16443",
-    token:  " eyJhbGciOiJSUzI1NiIsImtpZCI6InlHQmdCYURjSjh2Mk5CUWdwNkxxNEdndnJSVnpzeTYzVDNXVEFnWmFZOTAifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIl0sImV4cCI6MTcyNzczNTAyNCwiaWF0IjoxNzI3NzMxNDI0LCJpc3MiOiJodHRwczovL2t1YmVybmV0ZXMuZGVmYXVsdC5zdmMiLCJqdGkiOiI4MTU0NWVlOC1kMmYwLTQzYWMtYjE1Ni1hYWI0YjYyNjMxYmUiLCJrdWJlcm5ldGVzLmlvIjp7Im5hbWVzcGFjZSI6ImRlZmF1bHQiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6Ijk3NmIwOWJmLTYxM2QtNGNmMS05MzQ1LTIyMjExYTg2MmU5MSJ9fSwibmJmIjoxNzI3NzMxNDI0LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpkZWZhdWx0In0.SrlGZ88nJs4hsfd_C1Gq2UMtk6sU1gLt3otIQo9zJh_yHdnXeeTCZBBsNxmTfgdsLwDvVC3gFkxPR0_88u2tvHy0EHUvaXE0TuECxSHJlTS7lzEiK8wy13sU8hXbhrFthpiEMUJR5NKYzwhx9dDDpcmiIjbJQqGRqT3alfWf2Kvn87k5nG3SAmc_GpQc4mG6ECzD3QkX_Dhrv8wuv-Kda8bsZHL38dTjonX6iKhDi8ZWCORzx0Ot52bGawldUgZcbcNgmVlTtV67VWs2CoTmTWI9FleYfmPQ7oDc28aEdELXbTubGun5GVGnZZhzN8nu2R0kNJEFUUzox1lpbCeA_Q"
+    token:  "eyJhbGciOiJSUzI1NiIsImtpZCI6InlHQmdCYURjSjh2Mk5CUWdwNkxxNEdndnJSVnpzeTYzVDNXVEFnWmFZOTAifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIl0sImV4cCI6MTcyNzc0MTkwMCwiaWF0IjoxNzI3NzM4MzAwLCJpc3MiOiJodHRwczovL2t1YmVybmV0ZXMuZGVmYXVsdC5zdmMiLCJqdGkiOiI5YjczNTNiNC0zYTI5LTRmZDEtYmYyMC0wNzRkMDQxOTU1YzciLCJrdWJlcm5ldGVzLmlvIjp7Im5hbWVzcGFjZSI6ImRlZmF1bHQiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6Ijk3NmIwOWJmLTYxM2QtNGNmMS05MzQ1LTIyMjExYTg2MmU5MSJ9fSwibmJmIjoxNzI3NzM4MzAwLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpkZWZhdWx0In0.sBvOlWvSQUuSRJKUUWtP4GxdQY62BsFDjvlw63Qyy-kyoqMe0Ky5OFj_uBepvIDBGWy4FKBMjriiIjgpADyIdO_hhwG7n6jUo2hGJN0ULTClCR63NGLEJq6uPEVEcE9LBnGtyNIiHt8dyYdzx7ZzP_SRxynoGQCHbmWSV_aeV53sdzrzd4t8FEDhCtkdGiHDUYBgz1FqVhtDP0weQxFx6UyU8xGTR5ligQwbOhv5w77zRkyYKYy5rR0os6DEqN82NW4pFa0mFSHG8acgzdRYSP-WwSpI_6YQLgAtwSpB6GReG7mHha92OEP_o0QirFmOvmhdfF_DldmvEKycrddnRg"
+
 }
 
 async function getResource(cluster:Cluster, resource:string, namespace:string = "", api_type: string="api_v1" ) {
     let headers = generateHeaders(cluster.token)
+
+    console.log("headers: ", headers)
 
     let apiVersion = api_type
 
@@ -39,12 +50,20 @@ async function getResource(cluster:Cluster, resource:string, namespace:string = 
         resourceUrl = `https://${cluster.endpoint}/${apiVersion}/namespaces/${namespace}/${resource}`
     }
 
+    console.log("Resource URLs: ", resourceUrl)
+
     let results = await fetch(resourceUrl, {
         method: 'GET',
-        headers: headers
+        headers: headers,
+        agent: new https.Agent({
+            rejectUnauthorized: false,
+          })
+        
     })
 
-    let data = await results.json()
+    let data:any = await results.json()
+
+    console.log("Data x: ", data)
 
     if (data.items) {
         return data.items
