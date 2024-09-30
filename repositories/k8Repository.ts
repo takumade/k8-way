@@ -16,8 +16,22 @@ const myCluster:Cluster = {
     token:  " eyJhbGciOiJSUzI1NiIsImtpZCI6InlHQmdCYURjSjh2Mk5CUWdwNkxxNEdndnJSVnpzeTYzVDNXVEFnWmFZOTAifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjIl0sImV4cCI6MTcyNzczNTAyNCwiaWF0IjoxNzI3NzMxNDI0LCJpc3MiOiJodHRwczovL2t1YmVybmV0ZXMuZGVmYXVsdC5zdmMiLCJqdGkiOiI4MTU0NWVlOC1kMmYwLTQzYWMtYjE1Ni1hYWI0YjYyNjMxYmUiLCJrdWJlcm5ldGVzLmlvIjp7Im5hbWVzcGFjZSI6ImRlZmF1bHQiLCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6Ijk3NmIwOWJmLTYxM2QtNGNmMS05MzQ1LTIyMjExYTg2MmU5MSJ9fSwibmJmIjoxNzI3NzMxNDI0LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpkZWZhdWx0In0.SrlGZ88nJs4hsfd_C1Gq2UMtk6sU1gLt3otIQo9zJh_yHdnXeeTCZBBsNxmTfgdsLwDvVC3gFkxPR0_88u2tvHy0EHUvaXE0TuECxSHJlTS7lzEiK8wy13sU8hXbhrFthpiEMUJR5NKYzwhx9dDDpcmiIjbJQqGRqT3alfWf2Kvn87k5nG3SAmc_GpQc4mG6ECzD3QkX_Dhrv8wuv-Kda8bsZHL38dTjonX6iKhDi8ZWCORzx0Ot52bGawldUgZcbcNgmVlTtV67VWs2CoTmTWI9FleYfmPQ7oDc28aEdELXbTubGun5GVGnZZhzN8nu2R0kNJEFUUzox1lpbCeA_Q"
 }
 
-async function getResource(cluster:Cluster, resource:string, namespace:string = "") {
+async function getResource(cluster:Cluster, resource:string, api_type: string="api_v1", namespace:string = "") {
     let headers = generateHeaders(cluster.token)
+
+    let apiVersion = api_type
+
+    if (api_type === "api_v1") {
+        apiVersion = "api/v1"
+    }else if (api_type === "apps_v1") {
+        apiVersion = "apis/apps/v1"
+    } else if (api_type === "batch_v1") {
+        apiVersion = "apis/batch/v1"
+    } else if (api_type === "extensions_v1beta1") {
+        apiVersion = "apis/extensions/v1beta1"
+    }
+    
+
 
     let resourceUrl = `https://${cluster.endpoint}/api/v1/${resource}`
 
