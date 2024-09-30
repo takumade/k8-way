@@ -75,4 +75,8 @@ export async function getNamespaces() {
     return await getResource(myCluster, 'namespaces', '')
 }
 
+export async function getVolumes() {
+    return await getResource(myCluster, 'persistentvolumes', '')
+}
+
 
