@@ -26,3 +26,20 @@ export async function getNodes() {
     return []
 }
 
+export async function getServices() {
+    let headers = genHeaders(token)
+    let results = await fetch('https://127.0.0.1:16443/api/v1/services', {
+        method: 'GET',
+        headers: headers
+    })
+
+    let data = await results.json()
+
+    if (data.items) {
+        return data.items
+    }
+
+    return []
+}
+
+
