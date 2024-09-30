@@ -50,7 +50,7 @@ export function DashboardNav({
 
   return (
     <nav className="grid items-start gap-2">
-      <ClusterSelector clusters={clusters}  />
+      {isMobileNav || (!isMinimized && !isMobileNav) ? (<ClusterSelector clusters={clusters}  />): ""}
       <TooltipProvider>
         {items.map((item, index) => {
           const Icon = Icons[item.icon || 'arrowRight'];
