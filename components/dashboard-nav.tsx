@@ -106,8 +106,8 @@ export function DashboardNav({
                        path={path}
                        setOpen={setOpen}
                        Icon={Icon as LucideIcon}
-                       isMobileNav 
-                       isMinimized
+                       isMobileNav={isMobileNav} 
+                       isMinimized={isMinimized}
                        hideIcon
                        />
                     ))}
@@ -123,8 +123,8 @@ export function DashboardNav({
                   path={path}
                   setOpen={setOpen}
                   Icon={Icon as LucideIcon}
-                  isMobileNav 
-                  isMinimized
+                  isMobileNav={isMobileNav} 
+                  isMinimized={isMinimized}
                   />
             )
           );
