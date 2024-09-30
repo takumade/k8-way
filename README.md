@@ -60,6 +60,13 @@ The run the following
 npm run migrate
 ```
 
+## Tokens
+If you are using a local cluster, you can get the token by running the following command
+
+```sh
+microk8s kubectl create token default
+```
+
 
 ## Todo
 
