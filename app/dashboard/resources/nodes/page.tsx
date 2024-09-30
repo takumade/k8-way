@@ -6,7 +6,7 @@ import { getClusters } from '@/repositories/clusterRepository';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Cluster', link: '/dashboard/clusters' }
+  { title: 'Nodes', link: '/dashboard/nodes' }
 ];
 export default async function page() {
 
