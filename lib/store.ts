@@ -4,15 +4,22 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 
 
 
-const initialState = { 
+const initialStateCluster = { 
   selectedCluster: null,
   clusters: []
 }
 
+const initialStateNamespace = { 
+  selectedNamespace: null,
+  namespaces: []
+}
+
 const selectCluster = createAction('counter/increment')
 const addClusters = createAction('counter/incrementByAmount')
+const selectNamespace = createAction('counter/increment')
+const addNamespaces = createAction('counter/incrementByAmount')
 
-const clusterReducer = createReducer(initialState, (builder) => {
+const clusterReducer = createReducer(initialStateCluster, (builder) => {
   builder
     .addCase(selectCluster, (state, action) => {
       state.selectedCluster = action.payload as any
@@ -22,9 +29,20 @@ const clusterReducer = createReducer(initialState, (builder) => {
     })
 })
 
+const namespaceReducer = createReducer(initialStateNamespace, (builder) => {
+  builder
+    .addCase(selectNamespace, (state, action) => {
+      state.selectedNamespace = action.payload as any
+    })
+    .addCase(addNamespaces, (state, action) => {
+      state.namespaces = action.payload as any
+    })
+})
+
 const store = configureStore({
   reducer: {
-    cluster: clusterReducer
+    cluster: clusterReducer,
+    namespace: namespaceReducer
   },
 })
 
