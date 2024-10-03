@@ -8,7 +8,8 @@ import './globals.css';
 import { auth } from '@/auth';
 
 import { Provider } from 'react-redux'
-import store from '@/lib/store';
+import store from '@/store';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
