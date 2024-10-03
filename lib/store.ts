@@ -14,13 +14,6 @@ const initialStateNamespace = {
   namespaces: []
 }
 
-const selectCluster = createAction('counter/increment')
-const addClusters = createAction('counter/incrementByAmount')
-const selectNamespace = createAction('counter/increment')
-const addNamespaces = createAction('counter/incrementByAmount')
-
-
-
 enum ClusterActionType {
   SELECT_CLUSTER = 'SELECT_CLUSTER',
   ADD_CLUSTERS = 'ADD_CLUSTERS'
