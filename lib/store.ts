@@ -9,4 +9,24 @@ const store = configureStore({
   },
 })
 
+
+const initialState = { 
+  selectedCluster: 0,
+  clusters: []
+}
+
+
+
+const clusterReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(increment, (state, action) => {
+      state.value++
+    })
+    .addCase(incrementByAmount, (state, action) => {
+      state.value += action.payload
+    })
+})
+
+
+
 export default store
