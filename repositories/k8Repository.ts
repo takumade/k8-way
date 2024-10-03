@@ -5,6 +5,7 @@
 import fetch from 'node-fetch'
 
 import https from 'https'
+import { Cluster } from '@/types'
 
 
 function generateHeaders(k8s_token:string) {
@@ -14,10 +15,7 @@ function generateHeaders(k8s_token:string) {
     }
 }
 
-interface Cluster {
-    endpoint: string
-    token: string
-}
+
 
 const myCluster:Cluster = {
     endpoint: "127.0.0.1:16443",
@@ -35,7 +33,7 @@ async function getResource(cluster:Cluster, resource:string, namespace:string = 
     if (api_type === "api_v1") {
         apiVersion = "api/v1"
     }else if (api_type === "apps_v1") {
-        apiVersion = "apis/apps/v1"
+    apiVersion = "apis/apps/v1"
     } else if (api_type === "batch_v1") {
         apiVersion = "apis/batch/v1"
     } else if (api_type === "extensions_v1beta1") {
