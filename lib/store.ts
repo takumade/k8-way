@@ -29,15 +29,31 @@ const clusterReducer = createReducer(initialStateCluster, (builder) => {
     })
 })
 
-const namespaceReducer = createReducer(initialStateNamespace, (builder) => {
-  builder
-    .addCase(selectNamespace, (state, action) => {
-      state.selectedNamespace = action.payload as any
-    })
-    .addCase(addNamespaces, (state, action) => {
-      state.namespaces = action.payload as any
-    })
-})
+
+enum NamespaceActionType {
+  SELECT_NAMESPACE = 'SELECT_NAMESPACE',
+  ADD_NAMESPACES = 'ADD_NAMESPACES'
+}
+
+const namespaceReducer = (state = initialStateNamespace, action:any) => {
+  switch (action.type) {
+    case NamespaceActionType.SELECT_NAMESPACE:
+      return {
+        ...state,
+        selectedNamespace: action.payload
+      }
+    case NamespaceActionType.ADD_NAMESPACES:
+      return {
+        ...state,
+        namespaces: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+
+
 
 const store = configureStore({
   reducer: {
