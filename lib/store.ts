@@ -1,5 +1,5 @@
 
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 
@@ -61,13 +61,15 @@ const namespaceReducer = (state = initialStateNamespace, action:any) => {
 }
 
 
+const rootReducer = combineReducers({
+  cluster: clusterReducer,
+  namespace: namespaceReducer
+})
+
 
 
 const store = configureStore({
-  reducer: {
-    cluster: clusterReducer,
-    namespace: namespaceReducer
-  },
+  reducer: rootReducer
 })
 
 
