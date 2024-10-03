@@ -7,6 +7,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { auth } from '@/auth';
 
+import { Provider } from 'react-redux'
+import store from '@/lib/store';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -27,10 +30,12 @@ export default async function RootLayout({
         suppressHydrationWarning={true}
       >
         <NextTopLoader showSpinner={false} />
-        <Providers session={session}>
-          <Toaster />
-          {children}
-        </Providers>
+        <Provider store={store}>
+          <Providers session={session}>
+            <Toaster />
+            {children}
+          </Providers>
+        </Provider>
       </body>
     </html>
   );
