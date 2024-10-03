@@ -27,6 +27,11 @@ export interface FooterItem {
   }[];
 }
 
+export interface Cluster {
+  endpoint: string
+  token: string
+}
+
 export type MainNavItem = NavItemWithOptionalChildren;
 
 export type SidebarNavItem = NavItemWithChildren;
