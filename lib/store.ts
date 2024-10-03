@@ -19,21 +19,36 @@ const addClusters = createAction('counter/incrementByAmount')
 const selectNamespace = createAction('counter/increment')
 const addNamespaces = createAction('counter/incrementByAmount')
 
-const clusterReducer = createReducer(initialStateCluster, (builder) => {
-  builder
-    .addCase(selectCluster, (state, action) => {
-      state.selectedCluster = action.payload as any
-    })
-    .addCase(addClusters, (state, action) => {
-      state.clusters = action.payload as any
-    })
-})
 
+
+enum ClusterActionType {
+  SELECT_CLUSTER = 'SELECT_CLUSTER',
+  ADD_CLUSTERS = 'ADD_CLUSTERS'
+}
 
 enum NamespaceActionType {
   SELECT_NAMESPACE = 'SELECT_NAMESPACE',
   ADD_NAMESPACES = 'ADD_NAMESPACES'
 }
+
+const clusterReducer = (state = initialStateCluster, action:any) => {
+  switch (action.type) {
+    case ClusterActionType.SELECT_CLUSTER:
+      return {
+        ...state,
+        selectedCluster: action.payload
+      }
+    case ClusterActionType.ADD_CLUSTERS:
+      return {
+        ...state,
+        clusters: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+
 
 const namespaceReducer = (state = initialStateNamespace, action:any) => {
   switch (action.type) {
