@@ -2,19 +2,20 @@
 import { DashboardNav } from '@/components/dashboard-nav';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { navItems } from '@/constants/data';
+import { Cluster } from '@/database/entities';
 import { MenuIcon } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // import { Playlist } from "../data/playlists";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  // playlists: Playlist[];
+  clusters: Cluster[];
 }
 
-export function MobileSidebar({ className }: SidebarProps) {
+export function MobileSidebar({ className, clusters }: SidebarProps) {
   const [open, setOpen] = useState(false);
   return (
-    <>
+    <React.Fragment>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <MenuIcon />
@@ -30,12 +31,13 @@ export function MobileSidebar({ className }: SidebarProps) {
                   items={navItems}
                   isMobileNav={true}
                   setOpen={setOpen}
+                  clusters={clusters}
                 />
               </div>
             </div>
           </div>
         </SheetContent>
       </Sheet>
-    </>
+    </React.Fragment>
   );
 }

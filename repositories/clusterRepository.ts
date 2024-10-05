@@ -6,9 +6,12 @@ import { Cluster, ClusterUpdate, NewCluster } from "@/database/entities";
 
 
 export async function getClusters() {
-    return await db.selectFrom('cluster')
+    let clusters = await db.selectFrom('cluster')
         .selectAll()
         .execute()
+
+    console.log("Clusters: ", clusters.length)    
+    return clusters    
 }
 
 export async function findClusterById(id: number) {

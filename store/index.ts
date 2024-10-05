@@ -1,20 +1,18 @@
+"use client";
+import { configureStore } from '@reduxjs/toolkit'
 
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { clusterReducer, namespaceReducer } from './reducers';
-
-
-
-const rootReducer = combineReducers({
-  cluster: clusterReducer,
-  namespace: namespaceReducer
-})
+import { useStore } from 'react-redux';
+import { clusterReducer } from './reducers/clusterReducer';
+import { namespaceReducer } from './reducers/namespaceReducer';
 
 
-
-const store = configureStore({
-  reducer: rootReducer,
+export const store = configureStore({
+  reducer: {
+    cluster: clusterReducer,
+    namespace: namespaceReducer
+  },
   devTools: process.env.NODE_ENV !== 'production',
 });
 
 
-export default store
+export const useAppStore: () => typeof store = useStore
