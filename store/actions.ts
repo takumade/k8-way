@@ -27,4 +27,11 @@ const selectNamespaceAction = (namespace:any) => {
       payload: clusters
     }
   }
+
+  export {
+    selectNamespaceAction,
+    addNamespacesAction,
+    selectClusterAction,
+    addClustersAction
+  }
   
