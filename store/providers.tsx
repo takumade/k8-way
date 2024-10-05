@@ -11,11 +11,7 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode
 }) {
-  const storeRef = useRef<typeof AppStore>()
-  if (!storeRef.current) {
-    // Create the store instance the first time this renders
-    storeRef.current = AppStore
-  }
-  
-  return <Provider store={storeRef.current}>{children}</Provider>
+
+
+  return <Provider store={AppStore}>{children}</Provider>
 }
