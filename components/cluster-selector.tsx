@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/select"
 import { Cluster } from "@/constants/data"
 import { useDispatch } from "react-redux"
-import { selectClusterAction } from "@/store/actions"
+
+import { useSelector } from "react-redux"
+import { selectCluster } from "@/store/reducers/clusterReducer"
 
 
 
@@ -22,24 +24,20 @@ interface ClusterSelectorProps  {
 
 export function ClusterSelector({clusters}: ClusterSelectorProps) {
 
+  const selectedCluster = useSelector((state: any) => state.cluster.selectedCluster)
   const dispatch = useDispatch()
 
   const handleChange = (value:string) => {
     console.log(value)
 
-    let selectedCluster = clusters[parseInt(value)]
-
-    console.log(selectedCluster)
-
-    dispatch(selectClusterAction(selectedCluster))
+    let selectedCluster = clusters.find((cluster: Cluster) => cluster.id.toString() === value)
+    dispatch(selectCluster(selectedCluster))
   }
-
-
-
 
 
   return (
     <div className="pl-4">
+
         <Select onValueChange={handleChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a Cluster" />
@@ -50,7 +48,7 @@ export function ClusterSelector({clusters}: ClusterSelectorProps) {
 
           {
             clusters.map((cluster: Cluster, index) =>
-                <SelectItem value={index.toString()}>{cluster.name}</SelectItem>
+                <SelectItem value={cluster.id.toString()}>{cluster.name}</SelectItem>
             )
           }
 
