@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux"
 
 import { useSelector } from "react-redux"
 import { selectCluster } from "@/store/slices/clusterSlice"
+import { cookies } from "next/headers"
 
 
 
@@ -27,11 +28,13 @@ export function ClusterSelector({clusters}: ClusterSelectorProps) {
   const selectedCluster = useSelector((state: any) => state.cluster.selectedCluster)
   const dispatch = useDispatch()
 
+
   const handleChange = (value:string) => {
     console.log(value)
 
     let selectedCluster = clusters.find((cluster: Cluster) => cluster.id.toString() === value)
     dispatch(selectCluster(selectedCluster))
+    cookies().set('selectedCluster', JSON.stringify(selectedCluster))
   }
 
 
