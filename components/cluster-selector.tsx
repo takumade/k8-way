@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 
 import {
@@ -13,30 +15,41 @@ import { Cluster } from "@/constants/data"
 import { useDispatch } from "react-redux"
 
 import { useSelector } from "react-redux"
-import { selectCluster } from "@/store/slices/clusterSlice"
+import { addClusters, selectCluster } from "@/store/slices/clusterSlice"
 import { setCurrentCluster } from "@/repositories/k8Repository"
+import { getClusters } from "@/repositories/clusterRepository"
 
 
 
-interface ClusterSelectorProps  {
-  clusters: Cluster[]
-}
 
 
-export function ClusterSelector({clusters}: ClusterSelectorProps) {
-
+export function ClusterSelector() {
+ const clusters = useSelector((state: any) => state.cluster.clusters)
   const selectedCluster = useSelector((state: any) => state.cluster.selectedCluster)
   const dispatch = useDispatch()
+
+  const loadClusters = async () => {
+    let clusters = await getClusters()
+    dispatch(addClusters(clusters))
+  }
+
+
 
 
   const handleChange = (value:string) => {
     console.log(value)
 
-    let currentCluster:Cluster = clusters.find((cluster: Cluster) => cluster.id.toString() === value) as Cluster
-    dispatch(selectCluster(selectedCluster))
+    let currentCluster:Cluster = clusters.find((cluster: Cluster) => cluster.id.toString() == value) as Cluster
+
+    dispatch(selectCluster(currentCluster))
     setCurrentCluster(currentCluster as any)
 
   }
+
+  if (clusters.length == 0){
+   loadClusters()
+  }
+
 
 
   return (
@@ -51,8 +64,8 @@ export function ClusterSelector({clusters}: ClusterSelectorProps) {
           <SelectLabel>Cluster</SelectLabel>
 
           {
-            clusters.map((cluster: Cluster, index) =>
-                <SelectItem value={cluster.id.toString()}>{cluster.name}</SelectItem>
+            clusters.map((cluster: Cluster, index:number) =>
+                <SelectItem key={index} value={cluster.id.toString()}>{cluster.name}</SelectItem>
             )
           }
 
