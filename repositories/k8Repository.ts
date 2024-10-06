@@ -88,29 +88,29 @@ async function getResource(cluster:Cluster, resource:string, namespace:string = 
 }
 
 
-export async function getNodes(cluster: Cluster) {
-    return await getResource(cluster, 'nodes')
+export async function getNodes() {
+    return await getResource('nodes')
 }
 
-export async function getServices(cluster: Cluster) {
-    return await getResource(cluster, 'services')
+export async function getServices() {
+    return await getResource('services')
 }
 
 
-export async function getPods(cluster: Cluster) {
-    return await getResource(cluster, 'pods')
+export async function getPods() {
+    return await getResource('pods')
 }
 
-export async function getDeployments(cluster: Cluster) {
-    return await getResource(cluster, 'deployments', '', 'apps_v1')
+export async function getDeployments() {
+    return await getResource('deployments', '', 'apps_v1')
 }
 
-export async function getNamespaces(cluster: Cluster) {
-    return await getResource(cluster, 'namespaces', '')
+export async function getNamespaces() {
+    return await getResource('namespaces', '')
 }
 
-export async function getVolumes(cluster: Cluster) {
-    return await getResource(cluster, 'persistentvolumes', '')
+export async function getVolumes() {
+    return await getResource('persistentvolumes', '')
 }
 
 
