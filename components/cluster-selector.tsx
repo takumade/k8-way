@@ -13,7 +13,7 @@ import { Cluster } from "@/constants/data"
 import { useDispatch } from "react-redux"
 
 import { useSelector } from "react-redux"
-import { selectCluster } from "@/store/reducers/clusterReducer"
+import { selectCluster } from "@/store/slices/clusterSlice"
 
 
 
