@@ -10,10 +10,9 @@ import { Cluster } from '@/database/entities';
 
 type SidebarProps = {
   className?: string;
-  clusters: Cluster[]
 };
 
-export default function Sidebar({ className, clusters }: SidebarProps) {
+export default function Sidebar({ className}: SidebarProps) {
   const { isMinimized, toggle } = useSidebar();
 
   const handleToggle = () => {
@@ -58,7 +57,7 @@ export default function Sidebar({ className, clusters }: SidebarProps) {
         <div className="px-3 py-2">
           <div className="mt-3 space-y-1">
             
-            <DashboardNav items={navItems} clusters={clusters} />
+            <DashboardNav items={navItems}/>
           </div>
         </div>
       </div>

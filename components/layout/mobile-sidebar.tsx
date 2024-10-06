@@ -9,10 +9,9 @@ import React, { useState } from 'react';
 // import { Playlist } from "../data/playlists";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  clusters: Cluster[];
 }
 
-export function MobileSidebar({ className, clusters }: SidebarProps) {
+export function MobileSidebar({ className }: SidebarProps) {
   const [open, setOpen] = useState(false);
   return (
     <React.Fragment>
@@ -31,7 +30,7 @@ export function MobileSidebar({ className, clusters }: SidebarProps) {
                   items={navItems}
                   isMobileNav={true}
                   setOpen={setOpen}
-                  clusters={clusters}
+      
                 />
               </div>
             </div>
