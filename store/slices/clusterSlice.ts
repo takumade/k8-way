@@ -20,4 +20,4 @@ const clusterSlice = createSlice({
 });
 
 export const { selectCluster, addClusters } = clusterSlice.actions;
-export const clusterReducer = clusterSlice.reducer;
+export default clusterSlice.reducer;
