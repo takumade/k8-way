@@ -2,8 +2,8 @@
 
 import fetch from 'node-fetch'
 import https from 'https'
-import { Cluster } from '@/types'
 import { cookies } from 'next/headers'
+import { Cluster } from '@/database/entities'
 
 
 function generateHeaders(k8s_token:string) {
@@ -62,10 +62,10 @@ async function getResource(resource:string, api_type: string="api_v1" ) {
 
 
 
-    let resourceUrl = `https://${cluster.endpoint}/${apiVersion}/${resource}`
+    let resourceUrl = `https://${cluster.api}/${apiVersion}/${resource}`
 
     if (namespace) {
-        resourceUrl = `https://${cluster.endpoint}/${apiVersion}/namespaces/${namespace}/${resource}`
+        resourceUrl = `https://${cluster.api}/${apiVersion}/namespaces/${namespace}/${resource}`
     }
 
     console.log("Resource URLs: ", resourceUrl)
@@ -91,13 +91,13 @@ async function getResource(resource:string, api_type: string="api_v1" ) {
 }
 
 
-export async function setCluster(cluster: Cluster) {
+export async function setCurrentCluster(cluster: Cluster) {
     const headers = generateHeaders(cluster.token);
     cookies().set('selectedCluster', JSON.stringify(cluster));
     return headers;
 }
 
-export async function setNamespace(namespace: string) {
+export async function setCurrentNamespace(namespace: string) {
     cookies().set('selectedNamespace', namespace);
     return namespace;
 }
