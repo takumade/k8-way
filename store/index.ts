@@ -2,8 +2,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { useStore } from 'react-redux';
-import { clusterReducer } from './reducers/clusterReducer';
-import { namespaceReducer } from './reducers/namespaceReducer';
+import clusterReducer  from './slices/clusterSlice';
+import namespaceReducer from './slices/namespaceSlice';
 
 
 export const store = configureStore({
