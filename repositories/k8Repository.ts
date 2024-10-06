@@ -97,6 +97,11 @@ export async function setCluster(cluster: Cluster) {
     return headers;
 }
 
+export async function setNamespace(namespace: string) {
+    cookies().set('selectedNamespace', namespace);
+    return namespace;
+}
+
 
 export async function getNodes() {
     return await getResource('nodes')
