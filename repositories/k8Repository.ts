@@ -3,6 +3,7 @@
 import fetch from 'node-fetch'
 import https from 'https'
 import { Cluster } from '@/types'
+import { cookies } from 'next/headers'
 
 
 function generateHeaders(k8s_token:string) {
@@ -11,6 +12,29 @@ function generateHeaders(k8s_token:string) {
         'Authorization': `Bearer ${k8s_token}`
     }
 }
+
+
+async function getClusterFromCookies(){
+
+    let selectedCluster = cookies().get('selectedCluster')
+
+    if (selectedCluster) {
+        return JSON.parse(selectedCluster.value)
+    }else {
+        return null
+    }
+}
+
+async function getNamespacesFromCookies(){
+    
+        let selectedNamespace = cookies().get('selectedNamespace')
+    
+        if (selectedNamespace) {
+            return selectedNamespace.value
+        }else {
+            return null
+        }
+    }
 
 
 
