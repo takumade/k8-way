@@ -91,6 +91,13 @@ async function getResource(resource:string, api_type: string="api_v1" ) {
 }
 
 
+export async function setCluster(cluster: Cluster) {
+    const headers = generateHeaders(cluster.token);
+    cookies().set('selectedCluster', JSON.stringify(cluster));
+    return headers;
+}
+
+
 export async function getNodes() {
     return await getResource('nodes')
 }
