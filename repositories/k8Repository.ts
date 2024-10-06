@@ -40,7 +40,10 @@ async function getNamespacesFromCookies(){
 
 
 
-async function getResource(cluster:Cluster, resource:string, namespace:string = "", api_type: string="api_v1" ) {
+async function getResource(resource:string, api_type: string="api_v1" ) {
+    let cluster: Cluster = await getClusterFromCookies()
+    let namespace = await getNamespacesFromCookies()
+
     let headers = generateHeaders(cluster.token)
 
     console.log("headers: ", headers)
@@ -102,15 +105,15 @@ export async function getPods() {
 }
 
 export async function getDeployments() {
-    return await getResource('deployments', '', 'apps_v1')
+    return await getResource('deployments',  'apps_v1')
 }
 
 export async function getNamespaces() {
-    return await getResource('namespaces', '')
+    return await getResource('namespaces')
 }
 
 export async function getVolumes() {
-    return await getResource('persistentvolumes', '')
+    return await getResource('persistentvolumes')
 }
 
 
