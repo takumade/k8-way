@@ -25,6 +25,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { LucideIcon } from 'lucide-react';
 import { ClusterSelector } from './cluster-selector';
 import { Cluster } from '@/database/entities';
+import { useSelector } from 'react-redux';
 
 interface DashboardNavProps {
   items: NavItem[];
@@ -148,14 +149,25 @@ interface NavItemSingleProps {
 
 
 function NavItemSingle({index, item, path, setOpen, Icon, isMobileNav, hideIcon, isMinimized}: NavItemSingleProps) {
+  
+ 
+
+  let selectedCluster = useSelector((state: any) => state.cluster.selectedCluster)
+
+  const isItemDisabled = (item:any) => {
+    return item.disabled || (item.isResource && !selectedCluster)
+  }
+
+  console.log("Is item disabled: ", isItemDisabled(item))
+  
   return <Tooltip key={index}>
     <TooltipTrigger asChild>
       <Link
-        href={item.disabled ? '/' : item.href as string}
+        href={ isItemDisabled(item) ? '/' : item.href as string}
         className={cn(
           'flex items-center gap-2 overflow-hidden rounded-md py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground',
           path === item.href ? 'bg-accent' : 'transparent',
-          item.disabled && 'cursor-not-allowed opacity-80'
+          isItemDisabled(item)  && 'cursor-not-allowed opacity-80'
         )}
         onClick={() => {
           if (setOpen) setOpen(false);
