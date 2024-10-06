@@ -62,6 +62,7 @@ async function getResource(resource:string, api_type: string="api_v1" ) {
 
 
 
+
     let resourceUrl = `https://${cluster.api}/${apiVersion}/${resource}`
 
     if (namespace) {
