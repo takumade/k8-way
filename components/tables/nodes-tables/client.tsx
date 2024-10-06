@@ -23,8 +23,8 @@ export const NodesClient: React.FC<NodesClientProps> = ({ data }) => {
 
   let displayNodes = data.map(node => ({
     name: node.metadata.name,
-    status: node.status?.conditions[node.status.conditions.length - 1].type,
-    version: node.statu?.nodeInfo.kubeletVersion
+    status: node?.status?.conditions[node.status.conditions.length - 1].type,
+    version: node?.status?.nodeInfo.kubeletVersion
   }))
 
   return (
