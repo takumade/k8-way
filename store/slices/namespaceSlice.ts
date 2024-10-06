@@ -19,4 +19,4 @@ const namespaceSlice = createSlice({
 });
 
 export const { selectNamespace, addNamespaces } = namespaceSlice.actions;
-export const namespaceReducer =  namespaceSlice.reducer;
+export default namespaceSlice.reducer;

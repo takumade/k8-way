@@ -2,7 +2,8 @@
 
 import fetch from 'node-fetch'
 import https from 'https'
-import { Cluster } from '@/types'
+import { cookies } from 'next/headers'
+import { Cluster } from '@/database/entities'
 
 
 function generateHeaders(k8s_token:string) {
@@ -13,10 +14,36 @@ function generateHeaders(k8s_token:string) {
 }
 
 
+async function getClusterFromCookies(){
+
+    let selectedCluster = cookies().get('selectedCluster')
+
+    if (selectedCluster) {
+        return JSON.parse(selectedCluster.value)
+    }else {
+        return null
+    }
+}
+
+async function getNamespacesFromCookies(){
+    
+        let selectedNamespace = cookies().get('selectedNamespace')
+    
+        if (selectedNamespace) {
+            return selectedNamespace.value
+        }else {
+            return null
+        }
+    }
 
 
 
-async function getResource(cluster:Cluster, resource:string, namespace:string = "", api_type: string="api_v1" ) {
+
+
+async function getResource(resource:string, api_type: string="api_v1" ) {
+    let cluster: Cluster = await getClusterFromCookies()
+    let namespace = await getNamespacesFromCookies()
+
     let headers = generateHeaders(cluster.token)
 
     console.log("headers: ", headers)
@@ -35,10 +62,11 @@ async function getResource(cluster:Cluster, resource:string, namespace:string = 
 
 
 
-    let resourceUrl = `https://${cluster.endpoint}/${apiVersion}/${resource}`
+
+    let resourceUrl = `https://${cluster.api}/${apiVersion}/${resource}`
 
     if (namespace) {
-        resourceUrl = `https://${cluster.endpoint}/${apiVersion}/namespaces/${namespace}/${resource}`
+        resourceUrl = `https://${cluster.api}/${apiVersion}/namespaces/${namespace}/${resource}`
     }
 
     console.log("Resource URLs: ", resourceUrl)
@@ -64,29 +92,41 @@ async function getResource(cluster:Cluster, resource:string, namespace:string = 
 }
 
 
-export async function getNodes(cluster: Cluster) {
-    return await getResource(cluster, 'nodes')
+export async function setCurrentCluster(cluster: Cluster) {
+    const headers = generateHeaders(cluster.token);
+    cookies().set('selectedCluster', JSON.stringify(cluster));
+    return headers;
 }
 
-export async function getServices(cluster: Cluster) {
-    return await getResource(cluster, 'services')
+export async function setCurrentNamespace(namespace: string) {
+    cookies().set('selectedNamespace', namespace);
+    return namespace;
 }
 
 
-export async function getPods(cluster: Cluster) {
-    return await getResource(cluster, 'pods')
+export async function getNodes() {
+    return await getResource('nodes')
 }
 
-export async function getDeployments(cluster: Cluster) {
-    return await getResource(cluster, 'deployments', '', 'apps_v1')
+export async function getServices() {
+    return await getResource('services')
 }
 
-export async function getNamespaces(cluster: Cluster) {
-    return await getResource(cluster, 'namespaces', '')
+
+export async function getPods() {
+    return await getResource('pods')
 }
 
-export async function getVolumes(cluster: Cluster) {
-    return await getResource(cluster, 'persistentvolumes', '')
+export async function getDeployments() {
+    return await getResource('deployments',  'apps_v1')
+}
+
+export async function getNamespaces() {
+    return await getResource('namespaces')
+}
+
+export async function getVolumes() {
+    return await getResource('persistentvolumes')
 }
 
 

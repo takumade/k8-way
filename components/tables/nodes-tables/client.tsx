@@ -7,6 +7,8 @@ import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { columns } from './columns';
 import { Cluster } from '@/database/entities';
+import React from 'react';
+
 
 
 interface NodesClientProps {
@@ -21,12 +23,12 @@ export const NodesClient: React.FC<NodesClientProps> = ({ data }) => {
 
   let displayNodes = data.map(node => ({
     name: node.metadata.name,
-    status: node.status.conditions[node.status.conditions.length - 1].type,
-    version: node.status.nodeInfo.kubeletVersion
+    status: node?.status?.conditions[node.status.conditions.length - 1].type,
+    version: node?.status?.nodeInfo.kubeletVersion
   }))
 
   return (
-    <>
+    <React.Fragment>
       <div className="flex items-start justify-between">
         <Heading
           title={`Nodes (${data?.length})`}
@@ -41,6 +43,6 @@ export const NodesClient: React.FC<NodesClientProps> = ({ data }) => {
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={displayNodes} />
-    </>
+    </React.Fragment>
   );
 };

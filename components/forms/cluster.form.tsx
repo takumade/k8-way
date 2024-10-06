@@ -1,6 +1,6 @@
 'use client';
 import * as z from 'zod';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Trash } from 'lucide-react';
@@ -31,8 +31,7 @@ import { useToast } from '../ui/use-toast';
 import { createCluster, updateCluster } from '@/repositories/clusterRepository';
 
 
-
-
+import { useSelector } from 'react-redux';
 
 
 export const IMG_MAX_LIMIT = 3;
@@ -63,23 +62,38 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
   initialData
 }: ClusterFormProps) => {
 
+
+
+
+  const clusters = useSelector((state: any) => state.cluster.clusters);
+  const currentCluster = clusters.find((cluster: any) => cluster.id == initialData?.clusterId)
+
+
+  console.log("Current Cluster: ", currentCluster)
+  console.log("Intial Data: ", initialData)
+  const defaultValues = initialData
+    ? {
+        name: currentCluster?.name || '',
+        api: currentCluster?.api || '',
+        token: currentCluster?.token || '',
+        description: currentCluster?.description || '',
+      }
+    : {
+        name: 'mooo',
+        api: '',
+        token: '',
+        description: '',
+      };
+
   const params = useParams();
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
   const title = initialData ? 'Edit cluster' : 'Create cluster';
   const description = initialData ? 'Edit a cluster.' : 'Add a new cluster';
   const toastMessage = initialData ? 'Cluster updated.' : 'Cluster created.';
   const action = initialData ? 'Save changes' : 'Create';
-
-  const defaultValues =  {
-        name: '',
-        api: '',
-        token: '',
-        description: '',
-      };
 
   const form = useForm<ClusterFormValues>({
     resolver: zodResolver(formSchema),
@@ -135,7 +149,7 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
 
 
   return (
-    <>
+    <React.Fragment>
       {/* <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -165,7 +179,9 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
             <FormField
               control={form.control}
               name="name"
-              render={({ field }) => (
+              render={({ field }) => {
+                  console.log("Field: ", field)
+                return (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
@@ -177,7 +193,7 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              )}
+              )}}
             />
             <FormField
               control={form.control}
@@ -237,6 +253,6 @@ export const ClusterForm: React.FC<ClusterFormProps> = ({
           </Button>
         </form>
       </Form>
-    </>
+    </React.Fragment>
   );
 };

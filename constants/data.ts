@@ -172,7 +172,8 @@ export const navItems: NavItem[] = [
     title: 'Services',
     href: '/dashboard/services',
     icon: 'services',
-    label: 'services'
+    label: 'services',
+    isResource: true
   },
   {
     title: 'Resources',
@@ -184,31 +185,36 @@ export const navItems: NavItem[] = [
         title: 'Nodes',
         href: '/dashboard/resources/nodes',
         icon: 'user',
-        label: 'nodes'
+        label: 'nodes',
+        isResource: true
       },
       {
         title: 'Pods',
         href: '/dashboard/resources/pods',
         icon: 'user',
-        label: 'pods'
+        label: 'pods',
+        isResource: true
       },
       {
         title: 'Deployments',
         href: '/dashboard/resources/deployments',
         icon: 'user',
-        label: 'deployments'
+        label: 'deployments',
+        isResource: true
       },
       {
         title: 'Namespaces',
         href: '/dashboard/resources/namespaces',
         icon: 'user',
-        label: 'namespaces'
+        label: 'namespaces',
+        isResource: true
       },
       {
         title: 'Volumes',
         href: '/dashboard/resources/volumes',
         icon: 'user',
-        label: 'volumes'
+        label: 'volumes',
+        isResource: true
       },
     ]
   },
